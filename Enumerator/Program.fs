@@ -33,16 +33,25 @@
 
 
 open System.Net
+open System.Web
 open System.Xml.Linq
 
 let apikey = "734ed2307a98ea98593e50eb1bc66294"
 let secret = "7936c606d26c15548ca92863d2d1b3a3"
-let lastfm = "http://ws.audioscrobbler.com/2.0/?" 
-//method=auth.gettoken&api_key=b25b959554ed76058ac220b7b2e0a026"
 
-let lastfmcall apimethod =
-    let url = lastfm + "method=" + apimethod + "&api_key=" + apikey
+
+let lastfm = "http://ws.audioscrobbler.com/2.0/?" 
+
+let concatUrl x = 
+    x 
+    |> List.map (fun pair -> fst pair + "=" + snd pair) 
+    |> List.map HttpUtility.HtmlEncode
+    |> List.reduce (fun agg item -> agg + "&" + item)
+    
+let lastfmcall args =
+    let args = ("api_key", apikey) :: args
+    let url = lastfm + concatUrl args
     let client = new WebClient()
     XElement.Parse(client.DownloadString(url))
 
-let token = (lastfmcall "auth.getToken").Value
+let test = lastfmcall [("method","artist.getcorrection"); ("artist","Yoko Kanno")]
