@@ -55,3 +55,19 @@ let lastfmcall args =
     XElement.Parse(client.DownloadString(url))
 
 let test = lastfmcall [("method","artist.getcorrection"); ("artist","Yoko Kanno")]
+
+
+//let test2 = lastfmcall2 "artist.getcorrection", "artist", "Yoko Kanno"
+
+let original = ["artist.getcorrection"; "artist"; "Yoko Kanno"]
+let result = 
+    "method" :: original
+    |> List.mapi (fun i x -> (i, x))
+    |> List.fold (fun agg item -> agg + "&" + snd item) ""
+
+//fold : ('State -> 'T -> 'State) -> 'State -> 'T list -> 'State
+//needed : ('State -> 'T -> 'State) -> 'T list -> 'State
+
+partition + zip
+
+
