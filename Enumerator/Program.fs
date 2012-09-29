@@ -54,11 +54,34 @@ let lastfmcall args =
     let client = new WebClient()
     XElement.Parse(client.DownloadString(url))
 
-let test = lastfmcall [("method","artist.getcorrection"); ("artist","Yoko Kanno")]
+let test = lastfmcall [ ("method","artist.getcorrection"); ("artist","Yoko Kanno")]
+
+//---------------------
+// Исправить метаданные
+// Исправить структуру файлов
+// Дополнить лирикой и текстами
+//-----------------------------
+
+
+// Берем директорию с музыкальными файлами
+// Перечисляем все mp3
+// Из тегов достаем альбом, артиста, имя песни
+// Через last fm убеждаемся, что верны: имя песни, альбома, артиста, номер дорожки, год, жанр, Затереть: (номер диска, имя исполнителя) в комментарий ссылка на last fm
+// Альбом внутри папки должен быть один, если нет ошибка
+// Пишем в Id3 тег, затираем все остальные.
+
+
+// track.getCorrection исправляет песню (и артиста)
+// album.getTags/album.getTopTags жанр для альбома (и артиста)
+// album.getInfo получить треки из альбома
+// album.search ищет альбом по имени
+
+
+
 
 
 //let test2 = lastfmcall2 "artist.getcorrection", "artist", "Yoko Kanno"
-
+(*
 let original = ["artist.getcorrection"; "artist"; "Yoko Kanno"]
 let result = 
     "method" :: original
@@ -70,4 +93,6 @@ let result =
 
 partition + zip
 
+//d:\Music\Flesh Field\2004 - Strain\01 Uprising.mp3
 
+*)
