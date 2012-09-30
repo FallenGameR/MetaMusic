@@ -2,6 +2,7 @@
 
 open System.Net
 open System.Web
+open System.Xml
 open System.Xml.Linq
 
 let lastfmcall args =
@@ -16,9 +17,11 @@ let lastfmcall args =
     let client = new WebClient()
     XElement.Parse(client.DownloadString(url))
 
-let albumSearch album = lastfmcall [ ("method","album.search"); ("album",album) ]
 let trackCorrection title artist = lastfmcall [ ("method","track.getCorrection"); ("artist",artist); ("track",title) ]
 let albumInfo album artist = lastfmcall [ ("method","album.getInfo"); ("artist",artist); ("album",album) ]
+let albumSearch album = lastfmcall [ ("method","album.search"); ("album",album) ]
 let albumTopTags album artist = lastfmcall [ ("method","album.getTopTags"); ("artist",artist); ("album",album) ] 
 let artistCorrection artist = lastfmcall [ ("method","artist.getcorrection"); ("artist",artist)]
 let artistGetTopTags artist = lastfmcall [ ("method","artist.getTopTags"); ("artist",artist)]
+
+
