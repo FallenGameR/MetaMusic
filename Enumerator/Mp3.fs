@@ -1,4 +1,4 @@
-﻿module Mp3Tag
+﻿module Mp3
 
 open System.IO
 
