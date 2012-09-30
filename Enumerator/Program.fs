@@ -35,6 +35,7 @@
 open System.Net
 open System.Web
 open System.Xml.Linq
+open System.IO
 
 let apikey = "734ed2307a98ea98593e50eb1bc66294"
 let secret = "7936c606d26c15548ca92863d2d1b3a3"
@@ -77,6 +78,10 @@ let test = lastfmcall [ ("method","artist.getcorrection"); ("artist","Yoko Kanno
 // album.search ищет альбом по имени
 
 
+let folder = @"d:\Music\Garbage\2005 - Bleed Like Me\"
+let files = Directory.EnumerateFiles(folder, "*.mp3")
+
+files.map(
 
 
 
@@ -84,7 +89,7 @@ let test = lastfmcall [ ("method","artist.getcorrection"); ("artist","Yoko Kanno
 (*
 let original = ["artist.getcorrection"; "artist"; "Yoko Kanno"]
 let result = 
-    "method" :: original
+    method :: original
     |> List.mapi (fun i x -> (i, x))
     |> List.fold (fun agg item -> agg + "&" + snd item) ""
 
